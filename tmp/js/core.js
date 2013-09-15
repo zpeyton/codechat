@@ -70,7 +70,7 @@ function buildEmoticonList(){
 }
 
 function enableCodeMirrorOnTextArea (el_id,readOnly){
-	//'code_window'+res.current_user.id
+
 	var textarea = document.getElementById(el_id);
 	
 	var codeEditor = CodeMirror.fromTextArea(textarea, {
@@ -121,7 +121,6 @@ function enableCodeMirrorOnTextArea (el_id,readOnly){
 		} else {
 			//alert('not sent');	
 		}
-		
 		//debug(editor);
 	});
 
@@ -959,9 +958,6 @@ function displayErrors(errors,altel){
 	}				
 }
 
-
-
-	//Handle any messages sent from server
 	Server.bind('message', function(payload) {
 		
 		debug('recv: ' + payload);
@@ -996,15 +992,12 @@ function displayErrors(errors,altel){
 
 		case 'reg':
 			if(res.status == 'true'){
-				debug('autologin');
-
 				$('#login_username').val($('#reg_username').val());
 				$('#login_password').val($('#reg_password').val()); 
 				$('#login_form').submit();
 				$('#reg_password').val('');
 				$('#login_password').val('');
 			} else {
-				//alert(res.errors);
 				displayErrors(res.errors,'#reg_status');
 			}
 		break;
@@ -1377,13 +1370,13 @@ function displayErrors(errors,altel){
 				
 				case 'add':
 					var new_val = appendScript([
-							res._d.script_id,
-							'',
-							window.lastScriptSave.code,
-							'',
-							'',
-							'',
-							window.lastScriptSave.name
+						res._d.script_id,
+						'',
+						window.lastScriptSave.code,
+						'',
+						'',
+						'',
+						window.lastScriptSave.name
 					]);
 					$('#selector').val(new_val);
 				break;
