@@ -7,12 +7,11 @@
 <link href="tmp/libraries/bootstrap/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 <link href="tmp/libraries/bootstrap/css/font-awesome-ie7.min.css" rel="stylesheet" media="screen" />
 
-<script src="tmp/libraries/jquery-2.0.3.js"></script>
-<script src="tmp/libraries/jquery-2.0.3.js"></script>
+<script src="tmp/libraries/jquery/jquery-2.0.3.js"></script>
+<script src="tmp/libraries/jquery/jquery.cookie.js"></script>
 
 <!-- inclusion of jQuery UI (related to message flashing) contributed by Ali Sentas of Turkey -->
 <script src="tmp/libraries/jqueryui/jquery-ui.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
 
 <script src="tmp/js/fancywebsocket.js"></script>
