@@ -10,18 +10,17 @@
 <link href="tmp/libraries/bootstrap/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 <link href="tmp/libraries/bootstrap/css/font-awesome-ie7.min.css" rel="stylesheet" media="screen" />
 
-
 <!-- inclusion of jQuery UI (related to message flashing) contributed by Ali Sentas of Turkey -->
 <script src="tmp/libraries/jqueryui/jquery-ui.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
 
 <script src="tmp/js/fancywebsocket.js"></script>
 
-<!-- js color sugggested by Ali Sentas of Turkey -->
+<!-- js color suggested by Ali Sentas of Turkey -->
 
 <script type="text/javascript" src="tmp/libraries/jscolor/jscolor.js"></script>
 
-<!-- code mirror sugggested by Ali Sentas of Turkey -->
+<!-- code mirror suggested by Ali Sentas of Turkey -->
 
 <script type="text/javascript" src="tmp/libraries/codemirror/codemirror.js"></script>
 <link href="tmp/libraries/codemirror/codemirror.css" rel="stylesheet" />
@@ -33,9 +32,8 @@
 <!-- Adding Core Files -->
 <link href="tmp/css/core.css" rel="stylesheet" media="screen" />
 <script src="tmp/js/core.js"></script>
-
-	<title>Codechatter - Eat.Pray.Code();</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codechatter - Eat.Pray.Code();</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -51,44 +49,45 @@
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-      <span class="sr-only">Toggle</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#">CodeChatter</a>
+	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+	  <span class="sr-only">Toggle</span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	</button>
+	<a class="navbar-brand" href="/"><img alt="codechatter.com" src="/tmp/img/logo3.png" width="150px" height="21px"></a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="http://codechat.lytsp33d.com">Chat</a></li>
-	  <li title="Place to Earn CodeCoins"><a href="#">Contests</a></li>
-      <li><a href="#">My Profile</a></li>
-	  <li><a href="#">My Snippets</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit Account<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Edit Info</a></li>
-          <li><a href="#">Change Password</a></li>
-          <li><a href="#">Delete Account</a></li>
-          <li><a href="#">Buy CodeCoins</a></li>
-          <li><a href="#">One more separated link</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a id="logout" href="#">Logout</a></li>
-    </ul>
+	<ul class="nav navbar-nav">
+	  <li class="active"><a href="http://codechat.lytsp33d.com">Chat</a></li>
+	  <li title="Place to Earn CodeCoins"><a href="javascript:;">Contests</a></li>
+	  <li></li>
+	  <li></li>
+	  
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+	  <li class="dropdown">
+		<a class="avatar-nav" href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><img id="my_avatar" /><b class="caret"></b></a>
+		<ul class="dropdown-menu">
+		  <li><a id="update_avatar" href="javascript:;">Change Avatar</a></li>
+		  <!-- <li><a href="#">Change Password</a></li> -->
+		  <!-- <li><a href="#">Delete Account</a></li> -->
+		  <li><a href="javascript:;">My Profile</a></li>
+		  <li><a href="javascript:;">My Snippets</a></li>
+		  <li><a href="javascript:;">Buy CodeCoins</a></li>
+		  <li><a id="logout" href="javascript:;">Logout</a></li>
+		</ul>
+	  </li>
+	</ul>
   </div><!-- /.navbar-collapse -->
 </nav>
 
 <div class="">
 	<div class="row">
-			
-			<div style="text-align:center;margin-top:20px"><img alt="codechatter.com" src="http://www.textfx.co/tmp/140913/p4MnVdISw2FAb4Ae.png" width="75%"></div>
-			<h1>Eat.Pray.Code();</h1>
+		<div id="logo"><img alt="codechatter.com" src="/tmp/img/logo3.png" width="75%"></div>
+		<h1 id="tagline">Eat.Pray.Code();</h1>
 	</div>
 
 	<div class="row">
@@ -141,27 +140,22 @@
 	<div id="chatUI">
 		<div class="row">
 		<div class="col-lg-4">
-
 			<div id="log"></div>
-
 			<div id="msgWrap">
 				<input id="message" placeholder="Chat..." type="text" value="">
 			</div>
-
 			<div id="users">
 			<div id="userList"></div>
 		</div>
-	
 			<div id="settings">
-				<img id="my_avatar" /> <button id="update_avatar" class="btn btn-primary">Update avatar</button><br>
+				<!-- <button id="update_avatar" class="btn btn-primary">Update avatar</button><br> -->
 				<span class="readable">Chat comms:</span>
 				<code>/brb</code> <code>/back</code><br>
-
-				<span class="readable">Bkgr color:</span>
+				<!-- <span class="readable">Bkgr color:</span>
 				<input id="inbgcolor" class="color" placeholder="Enter a background color..." value="url(/lightspeed.png)" />
 				<br>
 				<span class="readable">Text color:</span> <input id="intextcolor" class="color" placeholder="Enter a text color..." value="#FFF" />
-				<br>
+				<br> -->
 				<div style="float:left;clear: both;border:3px ridge #24A6AB;padding:15px;margin-top:20px;resize:horizontal;">
 					<div id="liveclock" class="readable" style="position:relative;left:0;top:0px;"></div>
 				</div>
@@ -170,7 +164,6 @@
 		</div>
 
   <div class="col-lg-8">
-
 		<div id="userWhiteboards">
 			<div id="newsoftheday" style="display:none"><b>Important news of the day:</b>
 				<ul>
@@ -189,9 +182,7 @@
 <option>Select a script...</option>
 </select>
 <button id='addbtn' class="btn btn-info" onclick="addNewScript();"><i class='icon-cloud-upload'></i> Add</button>
-
 <button id='savebtn' class="btn btn-success" onclick="saveScript();"><i class='icon-save'></i> Save </button>
-
 <button id='deletebtn' class="btn btn-danger" onclick="deleteScript();"><i class='icon-trash'></i> Delete </button>
 
 		</div>
@@ -200,9 +191,7 @@
 
 		</div>
 	</div>
-		 
 	</div>
-	
 </div>
 
 <script language="JavaScript">
@@ -410,14 +399,6 @@ window.ElementRevolver = function(id,settings) {
 	return this;
 };
 
-
-
-function logout(){
-	
-	 $.cookie('code-haven', '', { expires : -1 });
-	 window.location.href = window.location.href;
-}
-
 function toggleSolarSystem(){
 	
 	if(!window.earth_rotator){
@@ -493,52 +474,52 @@ function toggleSolarSystem(){
 }
 toggleSolarSystem();  
 
-      var c=0;
-        var t;
-        var timer_is_on=0;
-        window.timer_end = function (){};
-        function timedCount(how_long)
-        {	
-        	var num = c/1000;
-        	var secs = num;
-        	if(c < 30000){
-        		secs = num;
-        	} else {
-        		var secs = Math.round(num);
-        	}
+var c=0;
+var t;
+var timer_is_on=0;
+window.timer_end = function (){};
+function timedCount(how_long)
+{	
+	var num = c/1000;
+	var secs = num;
+	if(c < 30000){
+		secs = num;
+	} else {
+		var secs = Math.round(num);
+	}
 
-        	if(c > 0){
-        		$('#run_area').html(secs);
-        		c=c-100;
-            	t=setTimeout("timedCount()",100);
-        	} else {
-        		stopCount();
-        		$('#run_area').html(0);
-        	}
-            
-        }
+	if(c > 0){
+		$('#run_area').html(secs);
+		c=c-100;
+		t=setTimeout("timedCount()",100);
+	} else {
+		stopCount();
+		$('#run_area').html(0);
+	}
+	
+}
 
-        function doTimer(length,cb)
-        {
-            if (!timer_is_on)
-            {
-            	window.c = length;
-            	window.timer_end = cb;
-                timer_is_on=1;
-                timedCount();
-            }
-        }
+function doTimer(length,cb)
+{
+	if (!timer_is_on)
+	{
+		window.c = length;
+		window.timer_end = cb;
+		timer_is_on=1;
+		timedCount();
+	}
+}
 
-        function stopCount()
-        {
-            clearTimeout(t);
-            window.timer_end();
-            timer_is_on=0;
-        }
-        function both(){
-            doTimer();
-            stopCount();
-        }
+function stopCount()
+{
+	clearTimeout(t);
+	window.timer_end();
+	timer_is_on=0;
+}
+function both(){
+	doTimer();
+	stopCount();
+}
 
 </script>
 </body>

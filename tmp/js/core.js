@@ -43,8 +43,6 @@ function bgChooser(color){
 	$('body').css('background',color);
 }
 
-window.codeEditors = {}
-
  var smileys = {
   ':)' : '25',
   '(angry)' : '5',
@@ -121,7 +119,6 @@ function enableCodeMirrorOnTextArea (el_id,readOnly){
 		} else {
 			//alert('not sent');	
 		}
-		//debug(editor);
 	});
 
 	codeEditor.on('cursorActivity',function (editor){
@@ -139,8 +136,6 @@ function enableCodeMirrorOnTextArea (el_id,readOnly){
 
 function replaceEmoticons(text){
 
-	// replace each smiley with an image
-	
 	for(var i in smileys){
 		var img = '<img src="http://png-2.findicons.com/files/icons/963/very_emotional_emoticons/32/32_'+smileys[i]+'.png" />';
 		text = text.replace(i,img);
@@ -191,11 +186,11 @@ function saveScript(){
 	}
 }
 
-  function addNewScript(){
+function addNewScript(){
 
 	var code = $('.tab.on textarea').val(); 
 	var name = prompt('What would you like to call this script?');
-	
+
 	if(name){
 		if(name.length){
 			window.lastScriptSave = {name:name,code:code}
@@ -212,9 +207,9 @@ function saveScript(){
 			$('#savebtn,#deletebtn').show();
 		} else {
 			alert('Please provide a script name');	
-		}	
+		}
 	}
-  }
+}
 
 function selectScript(code_array){
 
@@ -225,10 +220,9 @@ function selectScript(code_array){
 	if(number != 'Select a script...'){
 
 		var selected_code = window.ver[number];
-
 		editor.setValue(selected_code);	
-		
 		$('#savebtn, #deletebtn').show();
+
 	} else {
 
 		editor.setValue('');
@@ -266,6 +260,12 @@ function deleteScript(){
 		alert('Nice save');  
 	 }
  }
+
+function logout(){
+	
+	$.cookie('code-haven', '', { expires : -1 });
+	window.location.href = window.location.href;
+}
 
 $(document).ready(function() {
 	
@@ -808,6 +808,7 @@ function showLoggedinUI(res) {
 	$('#loginUI').hide();
 
 	$('#chatUI').show();
+	$('nav').show();
 	$('#message').focus();
 	$('#logout').click(function (){
 		logout();	
@@ -977,7 +978,9 @@ function displayErrors(errors,altel){
 			log('<div class="system message">TAG STARTED! '+name+' is it!!!</div>');
 			$('#mouse'+res.it+ '').css('border','5px solid cyan');
 			if(!window.tag_starter){
-				doTimer(res.duration);
+				if(res.duration != '0'){
+					doTimer(res.duration);
+				}
 			}
 
 		break;
@@ -1402,6 +1405,7 @@ function displayErrors(errors,altel){
 	window.availability_options = {'back':'green','available':'green','away':'orange','brb':'orange'};
 	window.tagged_it = 0;
 	window.participants = {};
+	window.codeEditors = {}
 	window.tag_occurred = null;
 	window.tag_starter = null;
 	window.onfocus = function() {
