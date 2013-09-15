@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset='UTF-8' />
+<script src="tmp/libraries/jquery/jquery-2.0.3.js"></script>
+<script src="tmp/libraries/jquery/jquery.cookie.js"></script>
 <link href="tmp/libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
 <link href="tmp/libraries/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
 <script src="tmp/libraries/bootstrap/js/bootstrap.min.js"></script>
 <link href="tmp/libraries/bootstrap/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 <link href="tmp/libraries/bootstrap/css/font-awesome-ie7.min.css" rel="stylesheet" media="screen" />
 
-<script src="tmp/libraries/jquery/jquery-2.0.3.js"></script>
-<script src="tmp/libraries/jquery/jquery.cookie.js"></script>
 
 <!-- inclusion of jQuery UI (related to message flashing) contributed by Ali Sentas of Turkey -->
 <script src="tmp/libraries/jqueryui/jquery-ui.js"></script>
