@@ -1,4 +1,4 @@
-CodeChat
+CodeChatter - Eat.Pray.Code();
 ========
 
-CodeChat is a new App that connects chatting, coding and collobrating together.
+CodeChat is a project that you can chat, code and collobrate.
