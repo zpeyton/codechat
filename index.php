@@ -79,7 +79,7 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Logout</a></li>
+      <li><a id="logout" href="#">Logout</a></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
@@ -139,10 +139,6 @@
 	</div>
 
 	<div id="chatUI">
-		<div class="row">
-			<div id="logout">Logout</div>
-		</div>
-
 		<div class="row">
 		<div class="col-lg-4">
 
