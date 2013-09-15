@@ -152,14 +152,14 @@
 		</div>
 
 		<div id="runCodeWrap">
-			<a id="runCode" class="btn btn-primary">Run code!</a> <a id="clearRunOutput" class="btn btn-warning">Clear Output</a> <select id="selector" onchange="selectScript(this)">
+			<a id="runCode" class="btn btn-primary"><i class='icon-circle-arrow-right'></i> Run Code!</a> <a id="clearRunOutput" class="btn btn-warning"><i class='icon-eraser'></i>Clear Output</a> <select id="selector" onchange="selectScript(this)">
 <option>Select a script...</option>
 </select>
-<button id='addbtn' class="btn btn-info" onclick="addNewScript();"> Add </button>
+<button id='addbtn' class="btn btn-info" onclick="addNewScript();"><i class='icon-cloud-upload'></i> Add</button>
 
-<button id='savebtn' class="btn btn-success" onclick="saveScript();"> Save </button>
+<button id='savebtn' class="btn btn-success" onclick="saveScript();"><i class='icon-save'></i> Save </button>
 
-<button id='deletebtn' class="btn btn-danger" onclick="deleteScript();"> Delete </button>
+<button id='deletebtn' class="btn btn-danger" onclick="deleteScript();"><i class='icon-trash'></i> Delete </button>
 
 		</div>
 		
