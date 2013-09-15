@@ -132,7 +132,7 @@
 				<div style="float:left;clear: both;border:3px ridge #24A6AB;padding:15px;margin-top:20px;resize:horizontal;">
 					<div id="liveclock" class="readable" style="position:relative;left:0;top:0px;"></div>
 				</div>
-				<div style="padding-top:20px;clear:both"><button onclick="toggleSolarSystem();">Toggle Solar System</button></div>
+				<!-- <div style="padding-top:20px;clear:both"><button onclick="toggleSolarSystem();">Toggle Solar System</button></div> -->
 			</div>
 		</div>
 		
