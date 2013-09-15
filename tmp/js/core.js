@@ -1,30 +1,25 @@
 var Server;
 
 function log(text) {
+
 	$log = $('#log');
-	//Add text to log
 	$log.append(($log.val() ? "\n" : '') + text);
-	//Autoscroll
 	$log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
 }
 
 function status(text,altel) {
 
 	if(typeof altel != 'undefined'){
-
 		$(altel).html(text);
 	} else {
 		$('#status').html(text);
 	}
 }
 
-
-
 function debug(text) {
 	if(window.debug_flag){
 		console.log(text);	
 	}
-	
 }
 
 function send(data) {
@@ -32,31 +27,6 @@ function send(data) {
 	Server.send('', data);
 }
 
-// overview
-
-// user comes to page
-
-// page connects to server
-
-// user enters info
-
-// client calls server to auth
-
-// server sends client response
-
-// if successful show the chatUI
-
-// if not show error message
-
-// once in chat there are a few main features
-
-// chat, typing status, whiteboard (code window) updates
-
-// all users are notified when a user joins or leaves
-
-// all users are notified of chats, typing statuses, etc
-
-// questions?
 function sendChat(msg){
 	var wrapped = {
 		'_m': 'msg',
@@ -75,43 +45,14 @@ function bgChooser(color){
 
 window.codeEditors = {}
 
- // set each type of smiley
-
-var smileys = {
-  ':)' : 'smile',
-  ':(' : 'angry',
-  '(angry)' : 'angry',
-  ':D' : 'biggrin',
-  'B)' : 'cool',
-  ':O' : 'ohmy',
-  '(blink)' : 'blink',
-  '(sleep)' : 'closedeyes',
-  '(huh)' : 'huh',
-  '(sad)' : 'sad',
-  '(beer)' : 'beer',
-  '(coffee)' : 'coffee',
-  '(kiss)' : 'lips',
-  '(rose)' : 'rose',
-  '(thumbsup)' : 'thumbup',
-  '(thumbsdown)' : 'thumbdown'
- }
-
  var smileys = {
   ':)' : '25',
-  // ':(' : 'angry',
   '(angry)' : '5',
   ':D' : '2',
-  // 'B)' : 'cool',
   ':O' : '34',
   '(blink)' : '21',
   '(sleep)' : '31',
-  // '(huh)' : 'huh',
-  // '(sad)' : 'sad',
-  // '(beer)' : 'beer',
-  // '(coffee)' : 'coffee',
   '(kiss)' : '16'
-  // '(thumbsup)' : 'thumbup',
-  // '(thumbsdown)' : 'thumbdown'
  }
 
 function buildEmoticonList(){
@@ -177,7 +118,6 @@ function enableCodeMirrorOnTextArea (el_id,readOnly){
 				}));	
 			}
 
-				
 		} else {
 			//alert('not sent');	
 		}
@@ -229,8 +169,6 @@ function appendScript(script){
 
 function saveScript(){
 
-	//log('<div class="system message">.tab[rel="user_'+window.current_user.id + '"] textarea</div>');
-
 	var code = $('.tab[rel="user_'+window.current_user.id + '"] textarea').val(); 
 
 	var script_var = $('#selector :selected').val();
@@ -255,10 +193,9 @@ function saveScript(){
 }
 
   function addNewScript(){
+
 	var code = $('.tab.on textarea').val(); 
-	
 	var name = prompt('What would you like to call this script?');
-	//var name = 'Save Test ' + new Date().getTime();
 	
 	if(name){
 		if(name.length){
@@ -280,51 +217,51 @@ function saveScript(){
 	}
   }
 
-	function selectScript(code_array){
+function selectScript(code_array){
 
-		var number = $(code_array).val();
+	var number = $(code_array).val();
+	
+	editor = window.codeEditors['code_window'+window.current_user.id];
 		
-		editor = window.codeEditors['code_window'+window.current_user.id];
-			
-		if(number != 'Select a script...'){
+	if(number != 'Select a script...'){
 
-			var selected_code = window.ver[number];
+		var selected_code = window.ver[number];
 
-			editor.setValue(selected_code);	
-			
-			$('#savebtn, #deletebtn').show();
-		} else {
+		editor.setValue(selected_code);	
+		
+		$('#savebtn, #deletebtn').show();
+	} else {
 
-			editor.setValue('');
-			$('#savebtn, #deletebtn').hide();	
-		}
+		editor.setValue('');
+		$('#savebtn, #deletebtn').hide();	
 	}
+}
 
 function deleteScript(){
 	conf = confirm("Are you sure you want to delete?");
 	if(conf == true){
 	
-			//grab selected option
-			selector_option = $('#selector :selected');
-			script_id = $('#selector :selected').val().replace('script_','');
+		//grab selected option
+		selector_option = $('#selector :selected');
+		script_id = $('#selector :selected').val().replace('script_','');
 
-			selector_option.remove();
-	
-			delete window.ver[script_id];
-			editor = window.codeEditors['code_window'+window.current_user.id];
-			editor.setValue('');
-			editor.save();
-			$('#savebtn, #deletebtn').hide();
-			if(script_id != 'Select a script...'){
+		selector_option.remove();
 
-				send(JSON.stringify({
-					'_m': 'script',
-					'_d': {
-						'script_id': script_id,
-						'action' : 'delete'
-						}
-				}));	
-			}
+		delete window.ver[script_id];
+		editor = window.codeEditors['code_window'+window.current_user.id];
+		editor.setValue('');
+		editor.save();
+		$('#savebtn, #deletebtn').hide();
+		if(script_id != 'Select a script...'){
+
+			send(JSON.stringify({
+				'_m': 'script',
+				'_d': {
+					'script_id': script_id,
+					'action' : 'delete'
+					}
+			}));	
+		}
 	}
 	 else{
 		alert('Nice save');  
@@ -334,6 +271,7 @@ function deleteScript(){
 $(document).ready(function() {
 	
 	//status('Connecting...');
+	$('#requestpassresetUI').hide();
 	Server = new FancyWebSocket('ws://codechat.lytsp33d.com:8080');
 
 	$('#login_form').submit(function(e) {
@@ -381,9 +319,9 @@ $(document).ready(function() {
 		}
 		
 		send(JSON.stringify({
-    		'_m' : 'requestpassreset',
-   			 'e': email
-  		}));
+			'_m' : 'requestpassreset',
+			 'e': email
+		}));
 
 		return false;
 	});
@@ -399,19 +337,17 @@ $(document).ready(function() {
 		
 		if(password == confirm){
 			
-			//$('matchpword').innerHTML	="OK!";
-
 		} else {
 			$('#passreset_status').html('<div class="error">Passwords do not match.</div>');
 			return false;
 		}
 		
 		send(JSON.stringify({
-    		'_m' : 'passreset',
-   			 't': tempkey,
-   			 'p': password,
-   			 'c': confirm
-  		}));
+			'_m' : 'passreset',
+			 't': tempkey,
+			 'p': password,
+			 'c': confirm
+		}));
 
 		return false;
 	});
@@ -432,7 +368,6 @@ $(document).ready(function() {
 
 			} else {
 				
-				//$('#matchpword').html("<span style='color:red'>Your passwords dont match</span>");
 				$('#reg_passwordconfirm').css('background-color','red');
 				debug('does not match');
 			}
@@ -527,7 +462,6 @@ function Blink(origState,state1,state2,el,property,obj,flag,interval){
 			if(commands.indexOf(msg_text) > -1){
 				//handleCommand();
 
-
 				if(1){
 						var new_status = msg_text.replace('/','');
 						window.my_status = new_status;
@@ -539,10 +473,8 @@ function Blink(origState,state1,state2,el,property,obj,flag,interval){
 					}));
 
 					window['user_'+window.current_user.id+'_typing'] = false;
-					//$('#user_'+window.current_user.id+' #typing').remove();
 				}
 			} else {
-					//alert(window.current_user.id);
 					var status = $('#user_'+window.current_user.id + ' .usrStatus').css('background-color');
 					if(window.my_status == 'brb' || window.my_status == 'away'){
 						window.my_status = 'available';
@@ -557,7 +489,6 @@ function Blink(origState,state1,state2,el,property,obj,flag,interval){
 					
 				sendChat(msg_text);
 			}
-
 				
 			$(this).val('');
 			window.typing = 'no';
@@ -625,31 +556,24 @@ function Blink(origState,state1,state2,el,property,obj,flag,interval){
 	}
   //var interval = setInterval(init,500);
 
-
-
 	$('#inbgcolor').change(function() {
 		var color = this.value;
 		if(color.indexOf('#') == -1 && color.indexOf('url') == -1){
 			color = '#'+ color;
 		}
-		//if (e.keyCode == 13 && color) {
-		//console.log('change '+color);
 		bgChooser(color);
-		//}
 	}).keypress(function(e) {
 
 		var color = this.value;
 
 		if (e.keyCode == 13 && color) {
-			//console.log('change '+color);
 			bgChooser(color);
 		}
+
 	}).blur(function() {
 
 		var color = this.value;
-		
 		bgChooser(color);
-		
 	});
 
 	$('#intextcolor').change(function() {
@@ -657,10 +581,7 @@ function Blink(origState,state1,state2,el,property,obj,flag,interval){
 		if(color.indexOf('#') == -1){
 			color = '#'+ color;
 		}
-		//if (e.keyCode == 13 && color) {
-		//console.log('change '+color);
 		textColorChooser(color);
-		//}
 	}).keypress(function(e) {
 		var color = this.value;
 		if (e.keyCode == 13 && color) {
@@ -671,7 +592,6 @@ function Blink(origState,state1,state2,el,property,obj,flag,interval){
 		var color = this.value;
 		
 		textColorChooser(color);
-		
 	});
 
 function textColorChooser(color){
@@ -680,17 +600,12 @@ function textColorChooser(color){
 		color = '#'+ color;
 	}
 
-	//console.log('change '+color);
-
 	window.textcolorOverride = color;
 	$('.message, h1').css('color',color);
-	//$('input,textarea,button').css('color','black');
 }
-
 
 function bindUsers(){
 
-	//console.log('bindusers');
 	$('.userItem').unbind('click');
 
 	$( "#newsoftheday" ).draggable();
@@ -711,11 +626,9 @@ function bindUsers(){
 		$('.tab[rel="'+id+'"]').addClass('on');
 
 		if(idnum == window.current_user.id){
-			//log('it\'s you!');
 			var script_var = $('#selector :selected').val();
 			script_id = $('#selector :selected').val().replace('script_','');
 			if(script_id != 'Select a script...'){
-				//log('asdf');
 				$('#savebtn,#deletebtn').show();
 			}
 		} else {
@@ -736,7 +649,7 @@ function bindUsers(){
   $('.userItem').unbind('hover');
   $(".userItem").hover(function(){
 	var username = $(this).children(".usrName").html();
-	var profilpic = $(this).children("img").attr("src") !== undefined ? $(this).children("img").attr("src") : "/avatar_default.jpg";
+	var profilpic = $(this).children("img").attr("src") !== undefined ? $(this).children("img").attr("src") : "/tmp/img/avatar_default.jpg";
 	var status = $(this).children(".usrStatus").attr("availability") == "green" ? "Online" : "Away";
 	var coin = $(this).attr('coin');
 	$(this).append("<div class='usrMiniInfoWrap'><div class='usrMiniInfo'><img height='200' src='"
@@ -774,16 +687,11 @@ function bindUsers(){
 			$('.usrName .arrow-down').css('left','20px');	
 		},500);
 		
-	
 	},function (){
 		//alert('out');
 		setTimeout(function (){
 			$('.tooltipwrapper').remove();
 		},550);
-		//$('.tooltipOnHover').fadeOut();
-		// $('.arrow-down').fadeOut(function (){
-				
-		// });
 	});
 
 	 // Sortable List
@@ -801,7 +709,6 @@ $('#runCode').click(function() {
 	saveScript();
 });
 
-
 $('#requestpassresetBtn').click(function() {
 	$('#loginUI').hide();
 	$('#requestpassresetUI').show();
@@ -817,15 +724,13 @@ $('#update_avatar').click(function() {
 });
 
 $('#clearRunOutput').click(function() {
-		clearRunOutput();
+	clearRunOutput();
 });
 
-
-
-
 function updateAvatar(url){
+
 	$('#my_avatar').attr('src',url);
-	$('#my_avatar').attr('src',url);
+
 	send(JSON.stringify({
 		'_m': 'avatar',
 		'_d': {
@@ -839,74 +744,45 @@ function runCode(){
 	console.log('Your code has been run!');
 
 	try {
-
-		//var s = document.getElementById('fred');
-		
-
-	  var custom_code = $('.tab.on textarea').val();
-		
-	  // include processing
-	  //var code_string = '<!DOCTYPE html><html><head><scr'+'ipt src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></scr'+'ipt><scr'+'ipt src="/processing-1.4.1.min.js"></scr'+'ipt></head><body>' + custom_code + '</body></html>';
-
-		//s.contentDocument.write(code_string);
-		//debug(s.contentDocument);
+		var custom_code = $('.tab.on textarea').val();
 		$('#run_area').html(custom_code); 
 	}
 	catch (e){
-		
-		var vDebug = "";
-	    for (var prop in e) 
-	    {  
-	       vDebug += "property: "+ prop+ " value: ["+ e[prop]+ "]\n"; 
-	    } 
-	    vDebug += "toString(): " + " value: [" + e.toString() + "]";
 
-	    alert(vDebug);
-			console.log(e);
+		alert(e);
+		console.log(e);
 	}
-	
 }
 
 
 function clearRunOutput(){
-
-	console.log('clearRunOutput');
   
-  $('#run_area').html('');
-	
+	$('#run_area').html('');
 }
 
+Server.bind('open', function() {
 
-	//Let the user know we're connected
-	Server.bind('open', function() {
-		//status('Connected!');
-		$('#requestpassresetUI').hide();
-		$('#passresetUI').hide();
-		//$('#login_username').focus();
-		
+	$('#requestpassresetUI').hide();
+	$('#passresetUI').hide();
+	
+	send(JSON.stringify({
+		'_m': 'auth',
+		'_d': {
+			'cookie': $.cookie('code-haven')	
+		}
+	}));
 
+});
 
-		send(JSON.stringify({
-			'_m': 'auth',
-			'_d': {
-				'cookie': $.cookie('code-haven')	
-			}
-		}));
+Server.bind('close', function(data) {
+	log('<div class="system message">Disconnected from server!</div>');
+});
 
-	});
-
-	//OH NOES! Disconnection occurred.
-	Server.bind('close', function(data) {
-		log('<div class="system message">Disconnected from server!</div>');
-		//alert('Disconnected!');
-		//$('#loginUI').hide();
-		//$('#chatUI').hide();
-	});
-
-	// displayTime for messages or anything else
-	// Contributed by: Ben from Maine
+// displayTime for messages or anything else
+// Contributed by: Ben from Maine
 
 function displayTime() {
+
 	var str = "";
 
 	var currentTime = new Date()
@@ -931,170 +807,138 @@ function displayTime() {
 
 function showLoggedinUI(res) {
 
-		$('#loginUI').hide();
+	$('#loginUI').hide();
 
-		$('#chatUI').show();
+	$('#chatUI').show();
+	$('#message').focus();
+	$('#logout').click(function (){
+		logout();	
+	});
+	var smileys_list = buildEmoticonList();
+
+	$('#msgWrap').append(smileys_list);
+
+	$('#msgWrap img').click(function (){
+		var icon_text = $(this).attr('title');
+
+		$('#message').val($('#message').val() + icon_text);
 		$('#message').focus();
-		$('#logout').click(function (){
-			logout();	
-		});
-		var smileys_list = buildEmoticonList();
+	});
 
-		$('#msgWrap').append(smileys_list);
+	$('#savebtn, #deletebtn').hide();
 
-		$('#msgWrap img').click(function (){
-			var icon_text = $(this).attr('title');
+	toggleSolarSystem();
 
-			$('#message').val($('#message').val() + icon_text);
-			$('#message').focus();
-		});
+	show5();
 
-		$('#savebtn, #deletebtn').hide();
+	status('');
 
-		toggleSolarSystem();
+	if (res.userlist.length > 0) {
 
-		show5();
-
-		status('');
-
-		if (res.userlist.length > 0) {
-
-			var demo = "<!"
-			+"--\n\ncode HTML CSS and JavaScript here\n\nthen click run :)\n\nclick someone else's name to see their code! \n\n-"+"->\n\n<scri"
-			+"pt>\n\n$('#foobar').html('Welcome to the chat room!');\n\n</scr"
-			+"ipt>\n\n<st"
-			+"yle>\n\n#foobar {\n\n\tborder: 1px solid cyan;\n\tpadding: 15px 0px 15px 0px;\n\tborder-radius:10px;\n\tbox-shadow:14px 14px 2px #888888;\n\tbackground:black;\n\tcolor:white;\n\ttext-align:center;\n\tfont-size:20px;\n\ttext-shadow:1px 1px 1px #888888;\n\t\n}\n\n#foobar:hover{\n\t\n\tbackground:white;\n\tcolor:black;\n\tborder:1px solid turquoise;\n\tbox-shadow:14px 14px 2px #282828;\n\ttext-shadow:1px 1px 0px #1E1E1E;\n\n}\n\n</st"
-			+"yle>\n\n<div id=\"foobar\"></div>";
-			//demo = '';
-			//var demo = 'hi';
-			for (var i in res.userlist) {
-				var name = res.userlist[i].name;
-				var id = res.userlist[i].id;
-				var avatar = res.userlist[i].avatar;
-				var whiteboard = res.userlist[i].whiteboard;
-				var codingPosition = res.userlist[i].codingPosition;
-				var tagged_it = res.userlist[i].tagged_it;
-				var coin = res.userlist[i].coin;
-				var avatar_img = "";
-				
-
-				//$('#run_area').append('tagged_it '+ tagged_it);
-				if(tagged_it == 'true'){
-					log('<div class="system message">'+name+' is it!</div>');
-					window.tagged_it = id;
-				}
-
-				if(codingPosition){
-					codingLine = parseInt(codingPosition.line) + 1;
-				} else {
-					
-					codingLine = '&nbsp;';
-				}
-				if(avatar){
-					avatar_img = "<img src=\""+avatar+"\"/>";
-				} else {
-					avatar = "/avatar_default.jpg";	
-				}
-
-
-				if(coin){
-					coin = ' coin="'+coin+'"';
-				} else {
-					coin = "";	
-				}
-
-
-				var availability = res.userlist[i].availability;
+		var demo = "<!"
+		+"--\n\ncode HTML CSS and JavaScript here\n\nthen click run :)\n\nclick someone else's name to see their code! \n\n-"+"->\n\n<scri"
+		+"pt>\n\n$('#foobar').html('Welcome to the chat room!');\n\n</scr"
+		+"ipt>\n\n<st"
+		+"yle>\n\n#foobar {\n\n\tborder: 1px solid cyan;\n\tpadding: 15px 0px 15px 0px;\n\tborder-radius:10px;\n\tbox-shadow:14px 14px 2px #888888;\n\tbackground:black;\n\tcolor:white;\n\ttext-align:center;\n\tfont-size:20px;\n\ttext-shadow:1px 1px 1px #888888;\n\t\n}\n\n#foobar:hover{\n\t\n\tbackground:white;\n\tcolor:black;\n\tborder:1px solid turquoise;\n\tbox-shadow:14px 14px 2px #282828;\n\ttext-shadow:1px 1px 0px #1E1E1E;\n\n}\n\n</st"
+		+"yle>\n\n<div id=\"foobar\"></div>";
+		//demo = '';
+		//var demo = 'hi';
+		for (var i in res.userlist) {
+			var name = res.userlist[i].name;
+			var id = res.userlist[i].id;
+			var avatar = res.userlist[i].avatar;
+			var whiteboard = res.userlist[i].whiteboard;
+			var codingPosition = res.userlist[i].codingPosition;
+			var tagged_it = res.userlist[i].tagged_it;
+			var coin = res.userlist[i].coin;
+			var avatar_img = "";
 			
-				var availability_color = window.availability_options[availability];
 
-				var readonly = 'readonly';
-				var selected = '';
-				var editor_readnly = true;
-				var tooltip_text = 'Watch '+ name +' code!';
-				if(!whiteboard) {
-					whiteboard = "\n";
-				}
-				window.current_user = res.current_user;
-				if(res.current_user.id == id) {
+			//$('#run_area').append('tagged_it '+ tagged_it);
+			if(tagged_it == 'true'){
+				log('<div class="system message">'+name+' is it!</div>');
+				window.tagged_it = id;
+			}
 
-					readonly= '';
-					selected = 'selected';
-					editor_readnly = false;
-					tooltip_text = 'Edit your code!';
-					my_avatar.src = avatar;
-					whiteboard = demo;
-				}
-
-				var userItem = '<div id="user_'
-				+ id + '" class="userItem usr '+selected
-				+' span9" '+coin+'><div class="usrStatus span2 hasHoverTooltip" availability="'
-				+availability_color+'" tooltip="Status (here/away)" style="background-color:'
-				+availability_color+'">&nbsp;</div>'+avatar_img+'<div class="usrName hasHoverTooltip" tooltip="'+tooltip_text+'">'
-				+ name + '</div><div class="usrCodeLine span2 hasHoverTooltip"'
-				+' tooltip="Current line number">'+codingLine+'</div></div>';
-
-				var userWhiteboard = '<div class="tab" rel="user_' + id
-				+ '"><textarea class="code_window" id="code_window'+ id
-				+'" '+readonly+' placeholder="// code here and then click run :)">'
-				+whiteboard+'</textarea></div>';
-
-				$('#userList').append(userItem);				
-				$('#userWhiteboards').append(userWhiteboard);
-
-				if(!editor_readnly){
-					$('.tab[rel="user_'+id+'"]').addClass('on');	
-				}
+			if(codingPosition){
+				codingLine = parseInt(codingPosition.line) + 1;
+			} else {
 				
-				var codeEditor = enableCodeMirrorOnTextArea('code_window'+id,editor_readnly);
-
-				//debug(whiteboard);
+				codingLine = '&nbsp;';
+			}
+			if(avatar){
+				avatar_img = "<img src=\""+avatar+"\"/>";
+			} else {
+				avatar = "/tmp/img/avatar_default.jpg";	
 			}
 
-			window.ver = {};
 
-			debug('building versions');
-
-			for(var i in res.scripts){
-				appendScript(res.scripts[i]);
+			if(coin){
+				coin = ' coin="'+coin+'"';
+			} else {
+				coin = "";	
 			}
 
-		} else {
-			console.log('Userlist exception: expected at least one')
+
+			var availability = res.userlist[i].availability;
+			var availability_color = window.availability_options[availability];
+
+			var readonly = 'readonly';
+			var selected = '';
+			var editor_readnly = true;
+			var tooltip_text = 'Watch '+ name +' code!';
+			
+			if(!whiteboard) {
+				whiteboard = "\n";
+			}
+
+			window.current_user = res.current_user;
+			if(res.current_user.id == id) {
+
+				readonly= '';
+				selected = 'selected';
+				editor_readnly = false;
+				tooltip_text = 'Edit your code!';
+				my_avatar.src = avatar;
+				whiteboard = demo;
+			}
+
+			var userItem = '<div id="user_'
+			+ id + '" class="userItem usr '+selected
+			+' span9" '+coin+'><div class="usrStatus span2 hasHoverTooltip" availability="'
+			+availability_color+'" tooltip="Status (here/away)" style="background-color:'
+			+availability_color+'">&nbsp;</div>'+avatar_img+'<div class="usrName hasHoverTooltip" tooltip="'+tooltip_text+'">'
+			+ name + '</div><div class="usrCodeLine span2 hasHoverTooltip"'
+			+' tooltip="Current line number">'+codingLine+'</div></div>';
+
+			var userWhiteboard = '<div class="tab" rel="user_' + id
+			+ '"><textarea class="code_window" id="code_window'+ id
+			+'" '+readonly+' placeholder="// code here and then click run :)">'
+			+whiteboard+'</textarea></div>';
+
+			$('#userList').append(userItem);				
+			$('#userWhiteboards').append(userWhiteboard);
+
+			if(!editor_readnly){
+				$('.tab[rel="user_'+id+'"]').addClass('on');	
+			}
+			
+			var codeEditor = enableCodeMirrorOnTextArea('code_window'+id,editor_readnly);
 		}
 
-		// bind self's white baord to changes            		 
-		 //var selfs_textarea = '.tab[rel="user_'+res.current_user.id+'"] textarea';
-			
-			// $(selfs_textarea).keydown(function(e) {
-					
-			// 		setTimeout(function (){
-						
-					
-			// 		// var char = $.getChar(e);
+		window.ver = {};
 
-			// 		// if(String.fromCharCode(char) != '\u0000'){
+		debug('building versions');
 
-			// 		// send whitespace chr
-					
-			// 		//var codingPosition = window.codeEditors['code_window'+res.current_user.id].getCursor();
-			// 		// String.fromCharCode(char)
+		for(var i in res.scripts){
+			appendScript(res.scripts[i]);
+		}
 
-			// 		//var code = $(selfs_textarea).val();
+	} else {
+		console.log('Userlist exception: expected at least one')
+	}
 
-			// 			 // send(JSON.stringify({
-			// 				// 	'_m': 'whiteboard',
-			// 				// 	'_d': {
-			// 				// 		'code': code,
-			// 				// 		'codingPosition': codingPosition
-			// 				// 	}
-			// 				// }));
-			// 		//}
-
-			// 		},100);
-			// });
-
-		bindUsers();
+	bindUsers();
 }
 
 function displayErrors(errors,altel){
@@ -1183,49 +1027,25 @@ function displayErrors(errors,altel){
 			users_total += ' signed up!';
 			$('#users_total').html(users_total);
 
-			// if(res.auth == 'yes'){
-	  //         //auto login
-	  //         $('#chatUI').show();
-	  //       } else {
-	  //         //show login form 
-	  //         //
-	  //         $('#loginUI').show();auth
-	  //         $('#login_username').focus();
-	  //       }
-
 			break;
 		
 		case 'msg':
 			
 			var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 			var exp2 = /([^' "\/.][a-z\-_0-9]*\.[a-z]{2,3}[-A-Za-z0-9+&@#\/%?=~_|!:,.;]*[-A-Za-z0-9+&@#\/%=~_|]*[^' "][a-z\-_0-9]*)/ig;
-		
 
-			// our handy staff array
 			var staff = ['Zach','Ben','crinderer','Kyle','Ali'];
 
-			// lets find out if the name is in the array
-
-			// indexOf returns the position of the first instance found
-			// name = Zach would return 0 cause it's first, ben 1, crind 2
-
-			var admin_class = ''; // not an admin by default
+			var admin_class = '';
 
 			if(staff.indexOf(res._d.user.name) > -1){ // -1 means it wasn't found at all
 
-			// this is a staff member
-
-			// now lets add something to the html
-
-			// so how do we want to do that... lets add a class to the <b>
-			//debug('wr\'re staff');
-			admin_class = "admin";
-
+				admin_class = "admin";
 			}
-  
 
 			res._d.msg = res._d.msg.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(exp, "<a target=\"_blank\" href='$1'>$1</a>"); //.replace(exp2, " <a target=\"_blank\" href='$1'>$1</a>")
 			res._d.msg = replaceEmoticons(res._d.msg);
+
 			log('<div class="message" title="'+displayTime()+'"> <b class="'+admin_class+'">' + res._d.user.name + ":</b> <span class=\"text\">" + res._d.msg + "</span></div>");
 			
 			if(window['textcolorOverride']){
@@ -1234,15 +1054,9 @@ function displayErrors(errors,altel){
 
 			window['user_'+res._d.user.id+'_typing'] = false;
 
-			//$('#user_'+res._d.user.id+' #typing').remove();
-
 			if (!window.isActive) {
 				window.origTitle = $('title').html();
-				if(window.titleChanger){
-					//console.log('titleChanger set');
-					//console.log(window.titleChanger);
-				} else {
-				
+				if(!window.titleChanger){
 					window.titleChanger = setInterval(function() {
 						if ($('title').html() == window.origTitle && !window.isActive) {
 							$('title').html('New Message...');
@@ -1274,8 +1088,6 @@ function displayErrors(errors,altel){
 				$('#login_username').focus();
 
 				if($('#passreset_tempkey').val().length){
-
-					//alert('show passreset form');
 					$('#passresetUI').show();
 					$('#loginUI').hide();
 				}
@@ -1291,6 +1103,7 @@ function displayErrors(errors,altel){
 			
 			var name = res._d.user.name;
 			var id = res._d.user.id;
+			var coin = res._d.user.coin;
 
 			var avatar = res._d.user.avatar;
 			var avatar_img = "";
@@ -1298,12 +1111,17 @@ function displayErrors(errors,altel){
 				avatar_img = "<img src=\""+avatar+"\"/>";
 			}
 
+			if(coin){
+				coin = ' coin="'+coin+'"';
+			} else {
+				coin = "";	
+			}
+
 			if (res._d.status == 'joined') {
 				log('<div class="system message">' + name + " joined!</div>");
 				$('#userList').append('<div id="user_' + id
-				 + '" class="userItem usr span9"><div class="usrStatus span2 hasHoverTooltip" availability="green" tooltip="Status (here/away)">&nbsp;</div>'+avatar_img+'<div class="usrName hasHoverTooltip" tooltip="Watch '+ name +' code!">' + name + '</div><div class="usrCodeLine span2 hasHoverTooltip" tooltip="Current line number">&nbsp;</div></div>');
+				 + '" class="userItem usr span9" '+coin+'><div class="usrStatus span2 hasHoverTooltip" availability="green" tooltip="Status (here/away)">&nbsp;</div>'+avatar_img+'<div class="usrName hasHoverTooltip" tooltip="Watch '+ name +' code!">' + name + '</div><div class="usrCodeLine span2 hasHoverTooltip" tooltip="Current line number">&nbsp;</div></div>');
 				$('#userWhiteboards').append('<div class="tab" rel="user_' + id + '"><textarea id="code_window'+id+'" readonly>' + '</textarea></div>');
-				//$(".userItem").popover();
 				bindUsers();
 				enableCodeMirrorOnTextArea('code_window'+id,true);
 			} else {
@@ -1323,18 +1141,10 @@ function displayErrors(errors,altel){
 			var orig = $(el).css(prop); 
 			
 			if(res._d.status == 'yes'){
-				//$('#user_'+res._d.user_id).append('<span id="typing">...</span>');
-				//alert('blick '+res._d.user_id);
-			
 				window[var_typing] = true;
-
 				Blink(orig,'#FFD68F',orig,el,prop,window,var_typing,300);
-
 			} else {
-					//alert('stop ' +var_typing);
-					window[var_typing] = false;
-					//$('#user_'+res._d.user_id+' #typing').remove();
-					
+				window[var_typing] = false;
 			}
 			break;
 
@@ -1366,7 +1176,6 @@ function displayErrors(errors,altel){
 			var avatar = $('#user_'+id+' img').attr('src');
 
 			if(id != window.current_user.id && name){
-				//alert('id'+id+window.current_user.id);
 				if(!avatar){
 					avatar = 'http://www.talkdesi.com/chatsupport/talkdesi-icons/smile.gif';
 				}
@@ -1384,16 +1193,6 @@ function displayErrors(errors,altel){
 					left: x,
 					top: y
 				});
-
-				// if(id == window.tag_it){
-
-				// 	if(window.my_coords.x >= x && window.my_coords.x <= (x+20) && window.my_coords.y >= y && window.my_coords.y <= (y+20)){
-						
-				// 		//sendChat(window.current_user.name + ' was tagged by ' + name);
-				// 		//window.tag_it = window.current_user.id;
-				// 	}
-
-				// }
 
 				window.participants[id] = {x:x,y:y,id:id,name:name};
 			}
@@ -1413,7 +1212,6 @@ function displayErrors(errors,altel){
 		case 'passreset':
 
 			if(res.status == 'true'){
-
 				alert('Sweet! You can now login with your new password.');
 				window.location.href = '/';
 			} else {
@@ -1422,208 +1220,183 @@ function displayErrors(errors,altel){
 
 			break;
 		case 'whiteboard':
-				//console.log(res._d.code);
-				//$('.tab[rel="user_'+res._d.user_id+'"] textarea').val(res._d.code);
-				//debug(res._d.user_id+ 'is coding');
-				//debug($('#user_'+res._d.user_id + ' coding').length);
-				//var linInt = parseInt(res._d.code.from.line) + 1;
-				var linInt = parseInt(res._d.codingPosition.line) + 1;
-				$('#user_'+res._d.user_id + ' .usrCodeLine').html(linInt);
+				
+			var linInt = parseInt(res._d.codingPosition.line) + 1;
+			$('#user_'+res._d.user_id + ' .usrCodeLine').html(linInt);
 
-				// prevents upating own code on broadcast 
-				//debug(res._d.user_id + ' ' + window.current_user.id);
-				if(res._d.user_id != window.current_user.id) {
-					editor = window.codeEditors['code_window'+res._d.user_id];
-					//debug('going to update whiteboard');
-					//whiteboard_updats++;
+			if(res._d.user_id != window.current_user.id) {
+				editor = window.codeEditors['code_window'+res._d.user_id];
+				editor.setValue(res._d.code);
+				editor.save();
+				editor.scrollIntoView(res._d.codingPosition);
+			}
+		break;
+		case 'tagged':
+			if(res.status == 'true'){
+				var name = $('#user_'+res.tagged+ ' .usrName').html();
+				$('.mouse').css('border','none');
+				$('#mouse'+res.tagged+ '').css('border','5px solid cyan');
+				log('<div class="system message">'+name+' is it!!!</div>');
+			}
 
-					//editor.replaceRange(res._d.code.text,res._d.code.from);
-					// use delete info calculate new value
-					// but what about syncing
-					// when they join the need the latest
-					// and we need to error check if the timing is not right
-					// 						
-					editor.setValue(res._d.code);
-					editor.save();
-					editor.scrollIntoView(res._d.codingPosition);
+		break;
+		case 'whiteboard_viewing':
+
+			var viewer_id = res._d.user_id; // the person who is doing the viewing
+			var viewee_id = res._d.now_viewing;
+			var was_viewing_id = res._d.was_viewing;
+
+			var was_viewing_watchers = res._d.was_viewing_watchers; // full watcher arrays for the changed people
+			var now_viewing_watchers = res._d.now_viewing_watchers; // full watcher arrays for the changed people
+
+			var viewer_name = $('#user_'+viewer_id +' .usrName').html();
+			var viewee_name = $('#user_'+viewee_id +' .usrName').html();
+			var prev_viewee_name = $('#user_'+was_viewing_id +' .usrName').html();
+			
+			var watcher_model = '<div class="watcher" rel="user__id_"><img title="_name_" src="_src_"></div>';
+			var now_viewing_watchers_code = '';
+
+			for(var i in now_viewing_watchers){
+
+				var id = now_viewing_watchers[i];
+				var src = $('#user_'+id+' img').attr('src');
+
+				if(!src){
+					src = '/tmp/img/avatar_default.jpg';
 				}
-				break;
-				case 'tagged':
-					if(res.status == 'true'){
-						var name = $('#user_'+res.tagged+ ' .usrName').html();
-						$('.mouse').css('border','none');
-						$('#mouse'+res.tagged+ '').css('border','5px solid cyan');
-						log('<div class="system message">'+name+' is it!!!</div>');
+				if(id != viewee_id){
+
+					var tpl_vars = {
+						id: id,
+						name: $('#user_'+id+' .usrName').html(),
+						src: src
+					}
+				
+					var watcher_code = watcher_model;
+					
+					for(var i in tpl_vars){
+						watcher_code = watcher_code.replace('_'+i+'_',tpl_vars[i]);
 					}
 
-				break;
-				case 'whiteboard_viewing':
+					now_viewing_watchers_code += watcher_code;
+				}
+			}
 
-					var viewer_id = res._d.user_id; // the person who is doing the viewing
-					var viewee_id = res._d.now_viewing;
-					var was_viewing_id = res._d.was_viewing;
+			var was_viewing_watchers_code = '';
+			for(var i in was_viewing_watchers){
 
-					var was_viewing_watchers = res._d.was_viewing_watchers; // full watcher arrays for the changed people
-					var now_viewing_watchers = res._d.now_viewing_watchers; // full watcher arrays for the changed people
+				var id = was_viewing_watchers[i];
 
-					var viewer_name = $('#user_'+viewer_id +' .usrName').html();
-					var viewee_name = $('#user_'+viewee_id +' .usrName').html();
-					var prev_viewee_name = $('#user_'+was_viewing_id +' .usrName').html();
-					
-					
-					// general ideas
-					// somewhere there is a visible array of watchers for each
-					// user.. where should it go?
+				var src = $('#user_'+id+' img').attr('src');
+				var name = $('#user_'+id+' .usrName').html();
+				if(id != was_viewing_id){
 
-					// whereever it is we need to update the model with the array info
-					var watcher_model = '<div class="watcher" rel="user__id_"><img title="_name_" src="_src_"></div>';
-					var now_viewing_watchers_code = '';
-
-					for(var i in now_viewing_watchers){
-
-						// list watchers
-						var id = now_viewing_watchers[i];
-						var src = $('#user_'+id+' img').attr('src');
+					if(name){
 
 						if(!src){
 							src = 'http://farts.typepad.com/photos/uncategorized/cat_fart.jpg';
 						}
-						if(id != viewee_id){
 
-							var tpl_vars = {
-								id: id,
-								name: $('#user_'+id+' .usrName').html(),
-								src: src
-							}
-						
-							var watcher_code = watcher_model;
-							
-							for(var i in tpl_vars){
-								watcher_code = watcher_code.replace('_'+i+'_',tpl_vars[i]);
-							}
-
-							now_viewing_watchers_code += watcher_code;
-						}
-					}
-
-					var was_viewing_watchers_code = '';
-					for(var i in was_viewing_watchers){
-
-						// list watchers
-						var id = was_viewing_watchers[i];
-
-						var src = $('#user_'+id+' img').attr('src');
-						var name = $('#user_'+id+' .usrName').html();
-						if(id != was_viewing_id){
-
-							if(name){
-		
-								if(!src){
-									src = 'http://farts.typepad.com/photos/uncategorized/cat_fart.jpg';
-								}
-
-								var tpl_vars = {
-									id: id,
-									name: $('#user_'+id+' .usrName').html(),
-									src: src
-								}
-								
-								var watcher_code = watcher_model;
-								
-								for(var i in tpl_vars){
-									watcher_code = watcher_code.replace('_'+i+'_',tpl_vars[i]);
-								}
-
-								was_viewing_watchers_code += watcher_code;
-							}
-
-						}
-					}
-
-					if(!$('#user_'+viewee_id+'_watchers').length){
-						$('.tab[rel="user_'+viewee_id+'"]').append('<div id="user_'+viewee_id+'_watchers" class="watcherWrap"></div>');
-					}
-
-					$('#user_'+viewee_id+'_watchers').html(now_viewing_watchers_code);
-
-
-					if(was_viewing_id){
-						if(!$('#user_'+was_viewing_id+'_watchers').length){
-							$('.tab[rel="user_'+viewee_id+'"]').append('<div id="user_'+was_viewing_id+'_watchers" class="watcherWrap"></div>');
-						}
-
-						$('#user_'+was_viewing_id+'_watchers').html(was_viewing_watchers_code);
-					}
-					
-					var prev_watching_string = '';
-					if(prev_viewee_name != null) {
-						prev_watching_string = '(who was previously watching '+prev_viewee_name+')';
-
-					}
-
-					var my_id = window.current_user.id;
-
-					if(viewee_id == my_id && viewer_id != my_id){
-						
-						if(window.watchers.indexOf(viewer_id) < 0){
-							log('<div class="system message">' + viewer_name + ' ' + prev_watching_string + ' is watching you code!</div>');
-							window.watchers.push(viewer_id);
+						var tpl_vars = {
+							id: id,
+							name: $('#user_'+id+' .usrName').html(),
+							src: src
 						}
 						
-					} else if(viewee_id != viewer_id && viewer_id != my_id) {
+						var watcher_code = watcher_model;
+						
+						for(var i in tpl_vars){
+							watcher_code = watcher_code.replace('_'+i+'_',tpl_vars[i]);
+						}
 
-						window.watchers.splice(window.watchers.indexOf(viewer_id), 1);	
-						log('<div class="system message">' + viewer_name + ' ' + prev_watching_string+ ' is watching '+ viewee_name +' code!</div>');
+						was_viewing_watchers_code += watcher_code;
 					}
 
+				}
+			}
+
+			if(!$('#user_'+viewee_id+'_watchers').length){
+				$('.tab[rel="user_'+viewee_id+'"]').append('<div id="user_'+viewee_id+'_watchers" class="watcherWrap"></div>');
+			}
+
+			$('#user_'+viewee_id+'_watchers').html(now_viewing_watchers_code);
+
+
+			if(was_viewing_id){
+				if(!$('#user_'+was_viewing_id+'_watchers').length){
+					$('.tab[rel="user_'+viewee_id+'"]').append('<div id="user_'+was_viewing_id+'_watchers" class="watcherWrap"></div>');
+				}
+
+				$('#user_'+was_viewing_id+'_watchers').html(was_viewing_watchers_code);
+			}
+			
+			var prev_watching_string = '';
+			if(prev_viewee_name != null) {
+				prev_watching_string = '(who was previously watching '+prev_viewee_name+')';
+
+			}
+
+			var my_id = window.current_user.id;
+
+			if(viewee_id == my_id && viewer_id != my_id){
+				
+				if(window.watchers.indexOf(viewer_id) < 0){
+					log('<div class="system message">' + viewer_name + ' ' + prev_watching_string + ' is watching you code!</div>');
+					window.watchers.push(viewer_id);
+				}
+				
+			} else if(viewee_id != viewer_id && viewer_id != my_id) {
+
+				window.watchers.splice(window.watchers.indexOf(viewer_id), 1);	
+				log('<div class="system message">' + viewer_name + ' ' + prev_watching_string+ ' is watching '+ viewee_name +' code!</div>');
+			}
+
+		break;
+		case 'availability':
+			
+			var color = window.availability_options[res._d.user.availability];
+
+			if(res._d.user.availability == 'brb') {
+				res._d.user.availability = 'away';
+			}
+			log('<div class="system message">' + res._d.user.name + " is "+res._d.user.availability+"!</div>");
+
+			$('#user_'+res._d.user.id+' .usrStatus').attr('availability',color).css('background-color',color);
+			
+			window['user_'+res._d.user.id+'_typing'] = false;
+
+		break;
+
+		case 'avatar':
+			$('#user_'+res._d.user_id + ' img').attr('src',res._d.avatar);
+		break
+
+		case 'script':
+
+			switch(res._d.action){
+				
+				case 'add':
+					var new_val = appendScript([
+							res._d.script_id,
+							'',
+							window.lastScriptSave.code,
+							'',
+							'',
+							'',
+							window.lastScriptSave.name
+					]);
+					$('#selector').val(new_val);
 				break;
-				case 'availability':
-					
-					var color = window.availability_options[res._d.user.availability];
-
-					if(res._d.user.availability == 'brb') {
-						res._d.user.availability = 'away';
+				case 'save':
+					if(!window.runcodeIntiated){
+						alert('Script saved!');
 					}
-					log('<div class="system message">' + res._d.user.name + " is "+res._d.user.availability+"!</div>");
-
-					$('#user_'+res._d.user.id+' .usrStatus').attr('availability',color).css('background-color',color);
 					
-					window['user_'+res._d.user.id+'_typing'] = false;
-
+					window.runcodeIntiated = null;
 				break;
-
-				case 'avatar':
-					//alert('update avatar');
-					$('#user_'+res._d.user_id + ' img').attr('src',res._d.avatar);
-
-				break
-
-				case 'script':
-
-					switch(res._d.action){
-						
-						case 'add':
-							var new_val = appendScript([
-									res._d.script_id,
-									'',
-									window.lastScriptSave.code,
-									'',
-									'',
-									'',
-									window.lastScriptSave.name
-							]);
-							$('#selector').val(new_val);
-						break;
-						case 'save':
-							if(!window.runcodeIntiated){
-								alert('Script saved!');
-							}
-							
-							window.runcodeIntiated = null;
-						break;
-						case 'delete':
-							alert('Script deleted!');
-					}
+				case 'delete':
+					alert('Script deleted!');
+			}
 		}
 	});
 
