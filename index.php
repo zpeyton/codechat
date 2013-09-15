@@ -46,6 +46,7 @@
 	<source src="http://www.freesfx.co.uk/rx2/mp3s/9/10507_1374247882.mp3"
 	type="audio/mpeg"></audio>
 </div>
+
 <div class="">
 	<div class="row">
 			
@@ -53,7 +54,6 @@
 			<h1>Eat.Pray.Code();</h1>
 	</div>
 
-	
 	<div class="row">
 		<div id="requestpassresetUI">
 			<h3>Reset your pass</h3>
@@ -75,7 +75,6 @@
 		</div>
 		<div id="loginUI">
 			<div class="col-lg-6">
-
 		<h3>Login</h3>
 		<div id="status"></div>
 		<form id="login_form">
@@ -106,6 +105,7 @@
 		<div class="row">
 			<div id="logout">Logout</div>
 		</div>
+
 		<div class="row">
 		<div class="col-lg-4">
 
