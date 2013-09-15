@@ -738,11 +738,12 @@ function bindUsers(){
 	var username = $(this).children(".usrName").html();
 	var profilpic = $(this).children("img").attr("src") !== undefined ? $(this).children("img").attr("src") : "/avatar_default.jpg";
 	var status = $(this).children(".usrStatus").attr("availability") == "green" ? "Online" : "Away";
+	var coin = $(this).attr('coin');
 	$(this).append("<div class='usrMiniInfoWrap'><div class='usrMiniInfo'><img height='200' src='"
 			  + profilpic + "' /><div class=\"name\">"
 			  + username + "<span style=\"color:"
 			  +$(this).children(".usrStatus").attr("availability")
-			  +"\">(" + status+')</span></div><!--<a class="btn btn-primary" onclick="alert(\'Test!\');">Test link</a>--></div>');
+			  +"\">(" + status+')</span><div class="coin">'+coin+' <span class="currency-symbol">₡</span>odeCoins</div></div><!--<a class="btn btn-primary" onclick="alert(\'Test!\');">Test link</a>--></div>');
   },function(){
 		var self = $(this);
 	   setTimeout(function (){
@@ -973,6 +974,7 @@ function showLoggedinUI(res) {
 				var whiteboard = res.userlist[i].whiteboard;
 				var codingPosition = res.userlist[i].codingPosition;
 				var tagged_it = res.userlist[i].tagged_it;
+				var coin = res.userlist[i].coin;
 				var avatar_img = "";
 				
 
@@ -993,6 +995,14 @@ function showLoggedinUI(res) {
 				} else {
 					avatar = "/avatar_default.jpg";	
 				}
+
+
+				if(coin){
+					coin = ' coin="'+coin+'"';
+				} else {
+					coin = "";	
+				}
+
 
 				var availability = res.userlist[i].availability;
 			
@@ -1018,7 +1028,7 @@ function showLoggedinUI(res) {
 
 				var userItem = '<div id="user_'
 				+ id + '" class="userItem usr '+selected
-				+' span9"><div class="usrStatus span2 hasHoverTooltip" availability="'
+				+' span9" '+coin+'><div class="usrStatus span2 hasHoverTooltip" availability="'
 				+availability_color+'" tooltip="Status (here/away)" style="background-color:'
 				+availability_color+'">&nbsp;</div>'+avatar_img+'<div class="usrName hasHoverTooltip" tooltip="'+tooltip_text+'">'
 				+ name + '</div><div class="usrCodeLine span2 hasHoverTooltip"'
