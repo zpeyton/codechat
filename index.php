@@ -47,11 +47,7 @@
 	<source src="http://www.freesfx.co.uk/rx2/mp3s/9/10507_1374247882.mp3"
 	type="audio/mpeg"></audio>
 </div>
-<<<<<<< HEAD
 
-<div class="">
-	<div class="row">
-=======
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
@@ -88,20 +84,14 @@
   </div><!-- /.navbar-collapse -->
 </nav>
 
-<div class="container-fluid">
-	<div class="row col-lg-12 col-sm-12 col-md-12">
->>>>>>> AliDev
+<div class="">
+	<div class="row">
 			
 			<div style="text-align:center;margin-top:20px"><img alt="codechatter.com" src="http://www.textfx.co/tmp/140913/p4MnVdISw2FAb4Ae.png" width="75%"></div>
 			<h1>Eat.Pray.Code();</h1>
 	</div>
 
-<<<<<<< HEAD
 	<div class="row">
-=======
-	
-	<div class="row col-lg-12 col-sm-12 col-md-12">
->>>>>>> AliDev
 		<div id="requestpassresetUI">
 			<h3>Reset your pass</h3>
 			<div id="requestpassreset_status"></div>
