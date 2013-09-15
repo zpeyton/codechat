@@ -270,7 +270,6 @@ function deleteScript(){
 $(document).ready(function() {
 	
 	//status('Connecting...');
-	$('#requestpassresetUI').hide();
 	Server = new FancyWebSocket('ws://codechat.lytsp33d.com:8080');
 
 	$('#login_form').submit(function(e) {
@@ -1173,13 +1172,13 @@ function displayErrors(errors,altel){
 					avatar = 'http://www.talkdesi.com/chatsupport/talkdesi-icons/smile.gif';
 				}
 				var m_id = 'mouse'+id;
-				var el = '#settings #'+m_id;
+				var el = 'body #'+m_id;
 				var m_el = '<div id="'+m_id+'" class="mouse"><img title="'+name+'" src="'+avatar+'" width="20px" height="20px"></div>';
 				var x = res.x;
 				var y = res.y;
 
 				if($(el).length == 0){
-					$('#settings').append(m_el);	
+					$('body').append(m_el);	
 				}
 
 				$(el).css({

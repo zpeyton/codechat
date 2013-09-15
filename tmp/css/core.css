@@ -192,7 +192,9 @@ a:hover {
 	position: absolute;
 	z-index: 0;
 }
-
+#requestpassresetUI, #passresetUI {
+	display: none;
+}
 #message {
 	position: relative;
 	z-index: 200;
@@ -350,6 +352,11 @@ width: 100%;
 	padding: 20px;
 	background-color: white;
 	margin-top: 20px;
+	color: black;
+}
+
+#run_area * {
+	color: black;
 }
 
 .tab textarea {

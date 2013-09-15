@@ -416,7 +416,6 @@ function toggleSolarSystem(){
 					'_m' : 'mouse',
 					'_d': { x: e.pageX, y: e.pageY }
 				}));
-				//alert('wtf');
 				window.my_mouse_last_send = now;
 			}
 
@@ -429,13 +428,10 @@ function toggleSolarSystem(){
 				var name = participants[i].name;
 				var id = participants[i].id;
 
-				//$('#run_area').html('<div>'+name+' is playing'+x+','+y+'</div>');
-
 				if(!window.tag_occurred){
-						if(window.my_coords.x >= x && window.my_coords.x <= (x+20) && window.my_coords.y >= y && window.my_coords.y <= (y+20)){
-						//sendChat(window.current_user.name + ' tagged ' + name + '!');
+
+					if(window.my_coords.x >= x && window.my_coords.x <= (x+25) && window.my_coords.y >= y && window.my_coords.y <= (y+25)){
 						
-						//log('<div class="system message">'+name+' is it!!!!</div>');
 						send(JSON.stringify({
 							'_m':'tagged',
 							'tagged': id
@@ -449,7 +445,6 @@ function toggleSolarSystem(){
 					}					
 				}
 			}
-			
 		});
 
 	} else {
