@@ -2,13 +2,14 @@
 <html>
 <head>
 <meta charset='UTF-8' />
+<script src="tmp/libraries/jquery/jquery-2.0.3.js"></script>
+<script src="tmp/libraries/jquery/jquery.cookie.js"></script>
 <link href="tmp/libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
 <link href="tmp/libraries/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
+<script src="tmp/libraries/bootstrap/js/bootstrap.min.js"></script>
 <link href="tmp/libraries/bootstrap/css/font-awesome.min.css" rel="stylesheet" media="screen" />
 <link href="tmp/libraries/bootstrap/css/font-awesome-ie7.min.css" rel="stylesheet" media="screen" />
 
-<script src="tmp/libraries/jquery/jquery-2.0.3.js"></script>
-<script src="tmp/libraries/jquery/jquery.cookie.js"></script>
 
 <!-- inclusion of jQuery UI (related to message flashing) contributed by Ali Sentas of Turkey -->
 <script src="tmp/libraries/jqueryui/jquery-ui.js"></script>
@@ -46,15 +47,61 @@
 	<source src="http://www.freesfx.co.uk/rx2/mp3s/9/10507_1374247882.mp3"
 	type="audio/mpeg"></audio>
 </div>
+<<<<<<< HEAD
 
 <div class="">
 	<div class="row">
+=======
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">CodeChatter</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="http://codechat.lytsp33d.com">Chat</a></li>
+	  <li title="Place to Earn CodeCoins"><a href="#">Contests</a></li>
+      <li><a href="#">My Profile</a></li>
+	  <li><a href="#">My Snippets</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit Account<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Edit Info</a></li>
+          <li><a href="#">Change Password</a></li>
+          <li><a href="#">Delete Account</a></li>
+          <li><a href="#">Buy CodeCoins</a></li>
+          <li><a href="#">One more separated link</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+<div class="container-fluid">
+	<div class="row col-lg-12 col-sm-12 col-md-12">
+>>>>>>> AliDev
 			
 			<div style="text-align:center;margin-top:20px"><img alt="codechatter.com" src="http://www.textfx.co/tmp/140913/p4MnVdISw2FAb4Ae.png" width="75%"></div>
 			<h1>Eat.Pray.Code();</h1>
 	</div>
 
+<<<<<<< HEAD
 	<div class="row">
+=======
+	
+	<div class="row col-lg-12 col-sm-12 col-md-12">
+>>>>>>> AliDev
 		<div id="requestpassresetUI">
 			<h3>Reset your pass</h3>
 			<div id="requestpassreset_status"></div>
@@ -135,7 +182,7 @@
 				<!-- <div style="padding-top:20px;clear:both"><button onclick="toggleSolarSystem();">Toggle Solar System</button></div> -->
 			</div>
 		</div>
-		
+
   <div class="col-lg-8">
 
 		<div id="userWhiteboards">
