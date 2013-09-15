@@ -225,6 +225,13 @@ a:hover {
 	letter-spacing: 1px;
 }
 
+.currency-symbol{
+	color:cyan; 
+}
+.coin{
+	color:orange;
+}
+
 .mouse {
 /*	padding: 1px 4px;*/
 	position: absolute;
@@ -1364,11 +1371,12 @@ function bindUsers(){
 	var username = $(this).children(".usrName").html();
 	var profilpic = $(this).children("img").attr("src") !== undefined ? $(this).children("img").attr("src") : "/avatar_default.jpg";
 	var status = $(this).children(".usrStatus").attr("availability") == "green" ? "Online" : "Away";
+	var coin = $(this).attr('coin');
 	$(this).append("<div class='usrMiniInfoWrap'><div class='usrMiniInfo'><img height='200' src='"
 			  + profilpic + "' /><div class=\"name\">"
 			  + username + "<span style=\"color:"
 			  +$(this).children(".usrStatus").attr("availability")
-			  +"\">(" + status+')</span></div><!--<a class="btn btn-primary" onclick="alert(\'Test!\');">Test link</a>--></div>');
+			  +"\">(" + status+')</span><div class="coin">'+coin+' <span class="currency-symbol">₡</span>odeCoins</div></div><!--<a class="btn btn-primary" onclick="alert(\'Test!\');">Test link</a>--></div>');
   },function(){
 		var self = $(this);
 	   setTimeout(function (){
@@ -1599,6 +1607,7 @@ function showLoggedinUI(res) {
 				var whiteboard = res.userlist[i].whiteboard;
 				var codingPosition = res.userlist[i].codingPosition;
 				var tagged_it = res.userlist[i].tagged_it;
+				var coin = res.userlist[i].coin;
 				var avatar_img = "";
 				
 
@@ -1614,10 +1623,17 @@ function showLoggedinUI(res) {
 					
 					codingLine = '&nbsp;';
 				}
+
 				if(avatar){
 					avatar_img = "<img src=\""+avatar+"\"/>";
 				} else {
 					avatar = "/avatar_default.jpg";	
+				}
+
+				if(coin){
+					coin = ' coin="'+coin+'"';
+				} else {
+					coin = "";	
 				}
 
 				var availability = res.userlist[i].availability;
@@ -1644,7 +1660,7 @@ function showLoggedinUI(res) {
 
 				var userItem = '<div id="user_'
 				+ id + '" class="userItem usr '+selected
-				+' span9"><div class="usrStatus span2 hasHoverTooltip" availability="'
+				+' span9" '+coin+'><div class="usrStatus span2 hasHoverTooltip" availability="'
 				+availability_color+'" tooltip="Status (here/away)" style="background-color:'
 				+availability_color+'">&nbsp;</div>'+avatar_img+'<div class="usrName hasHoverTooltip" tooltip="'+tooltip_text+'">'
 				+ name + '</div><div class="usrCodeLine span2 hasHoverTooltip"'
@@ -1907,6 +1923,7 @@ function displayErrors(errors,altel){
 			
 			var name = res._d.user.name;
 			var id = res._d.user.id;
+			var coin = res._d.user.coin;
 
 			var avatar = res._d.user.avatar;
 			var avatar_img = "";
@@ -1914,10 +1931,16 @@ function displayErrors(errors,altel){
 				avatar_img = "<img src=\""+avatar+"\"/>";
 			}
 
+			if(coin){
+				coin = ' coin="'+coin+'"';
+			} else {
+				coin = "";	
+			}
+
 			if (res._d.status == 'joined') {
 				log('<div class="system message">' + name + " joined!</div>");
 				$('#userList').append('<div id="user_' + id
-				 + '" class="userItem usr span9"><div class="usrStatus span2 hasHoverTooltip" availability="green" tooltip="Status (here/away)">&nbsp;</div>'+avatar_img+'<div class="usrName hasHoverTooltip" tooltip="Watch '+ name +' code!">' + name + '</div><div class="usrCodeLine span2 hasHoverTooltip" tooltip="Current line number">&nbsp;</div></div>');
+				 + '" class="userItem usr span9" '+coin+'><div class="usrStatus span2 hasHoverTooltip" availability="green" tooltip="Status (here/away)">&nbsp;</div>'+avatar_img+'<div class="usrName hasHoverTooltip" tooltip="Watch '+ name +' code!">' + name + '</div><div class="usrCodeLine span2 hasHoverTooltip" tooltip="Current line number">&nbsp;</div></div>');
 				$('#userWhiteboards').append('<div class="tab" rel="user_' + id + '"><textarea id="code_window'+id+'" readonly>' + '</textarea></div>');
 				//$(".userItem").popover();
 				bindUsers();
