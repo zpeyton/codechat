@@ -107,7 +107,7 @@
 			<div id="logout">Logout</div>
 		</div>
 		<div class="row-fluid">
-		<div class="col-lg-4">
+		<div class="span4">
 
 			<div id="log"></div>
 
@@ -136,7 +136,7 @@
 			</div>
 		</div>
 		
-  <div class="col-lg-8">
+  <div class="span8">
 
 		<div id="userWhiteboards">
 			<div id="newsoftheday" style="display:none"><b>Important news of the day:</b>
