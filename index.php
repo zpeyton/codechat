@@ -33,7 +33,7 @@
 <link href="tmp/css/core.css" rel="stylesheet" media="screen" />
 <script src="tmp/js/core.js"></script>
 
-	<title>Codechatter - Eat.Pray.Code();</title>
+	<title>Codechatter - Eat.Pray.Test();</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
