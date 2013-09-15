@@ -47,7 +47,7 @@
 	<source src="http://www.freesfx.co.uk/rx2/mp3s/9/10507_1374247882.mp3"
 	type="audio/mpeg"></audio>
 </div>
-<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
