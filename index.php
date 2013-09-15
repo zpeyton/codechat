@@ -47,14 +47,14 @@
 	type="audio/mpeg"></audio>
 </div>
 <div class="container-fluid">
-	<div class="row span12">
+	<div class="row col-lg-12">
 			
 			<div style="text-align:center;margin-top:20px"><img alt="codechatter.com" src="http://www.textfx.co/tmp/140913/p4MnVdISw2FAb4Ae.png" width="75%"></div>
 			<h1>Eat.Pray.Code();</h1>
 	</div>
 
 	
-	<div class="row span12">
+	<div class="row col-lg-12">
 		<div id="requestpassresetUI">
 			<h3>Reset your pass</h3>
 			<div id="requestpassreset_status"></div>
@@ -74,7 +74,7 @@
 			</form>
 		</div>
 		<div id="loginUI">
-			<div class="span6">
+			<div class="col-lg-6">
 
 		<h3>Login</h3>
 		<div id="status"></div>
@@ -87,7 +87,7 @@
 		<a id="requestpassresetBtn" class="readable">Forgot password?</a>
 		</div>
 
-		<div class="span6">
+		<div class="col-lg-6">
 		<h3>Signup</h3>
 		<div id="reg_status"></div>
 		<form id="reg_form">
@@ -107,7 +107,7 @@
 			<div id="logout">Logout</div>
 		</div>
 		<div class="row-fluid">
-		<div class="span4">
+		<div class="col-lg-4">
 
 			<div id="log"></div>
 
@@ -136,7 +136,7 @@
 			</div>
 		</div>
 		
-  <div class="span8">
+  <div class="col-lg-8">
 
 		<div id="userWhiteboards">
 			<div id="newsoftheday" style="display:none"><b>Important news of the day:</b>
