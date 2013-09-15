@@ -526,45 +526,48 @@ b.admin{
     box-shadow:1px 2px 1px gray;
   }
 
-  .row-fluid {
+  .row {
   	clear: both;
   }
   /*Stuff Being Tested, Stop Copying*/
   
  
 @media (max-width: 979px) and (min-width: 768px) {
-	.span12 {
+	.row {
 		width: 95%;
 	}
 }
 
 
-@media (max-width: 480px){
+@media (max-width: 768px){
 
 	.usrMiniInfo {
 		display: none;
 	}
+
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+
+	}
 }
 
-@media (min-width: 979px) and (max-width: 1200px) {
+@media (min-width: 768px) {
 
- .row-fluid {
-		width: 100%;
- }
- .span12 {
+ .row {
 	width: 98%;
 	margin-right: 0px;
 	margin-left: 10px;
  }
 
- .span8 {
-	width: 72%;
+ .col-lg-8 {
+	width: 75%;
 	margin-right: 0px;
-	margin-left: 20px;
+	margin-left: 0px;
 	float: left;
  }
 
- .span4 {
+ .col-lg-4 {
 	width: 25%;
 	float: left;
 	margin-right: 0px;
