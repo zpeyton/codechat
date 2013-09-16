@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- this is a test -->
+<!-- this is a test of a another commit from my branch -->
 <html>
 <head>
 <meta charset='UTF-8' />
