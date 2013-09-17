@@ -1,4 +1,4 @@
 CodeChatter - Eat.Pray.Code();
 ========
 
-CodeChat is a project that you can chat, code and collobrate.
+CodeChatter is a fun learning and teaching environnment where you can chat, code and colloborate.
