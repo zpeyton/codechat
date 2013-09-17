@@ -1,7 +1,8 @@
 <!doctype html>
-<!-- this is a test of a another commit from my branch -->
+
 <html>
 <head>
+<link rel="shortcut icon" href="tmp/img/favicon.ico"> 
 <meta charset='UTF-8' />
 <script src="tmp/libraries/jquery/jquery-2.0.3.js"></script>
 <script src="tmp/libraries/jquery/jquery.cookie.js"></script>
