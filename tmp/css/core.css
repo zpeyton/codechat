@@ -445,14 +445,6 @@ h1 {
 .row {
 	clear: both;
 }
-
-.col-lg-4, .col-lg-8 {
-	padding-left: 0px;
-	padding-right: 0px;
-}
-.col-lg-8 {
-	padding-left: 10px;
-}
 /*Stuff Being Tested, Stop Copying*/
  @media (max-width: 979px) and (min-width: 768px) {
 	.row {
@@ -474,12 +466,14 @@ h1 {
 	#tagline {
 		font-size: 18px;
 	}
-
-	.col-lg-8 {
-		padding-left: 0px;
-	}
 }
-
+.col-lg-4, .col-lg-8 {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.col-lg-8 {
+	padding-left: 10px;
+}
 
 nav {
 	display: none;
