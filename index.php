@@ -65,6 +65,7 @@
 	<ul class="nav navbar-nav">
 	  <li class="active"><a href="http://codechat.lytsp33d.com">Chat</a></li>
 	  <li title="Place to Earn CodeCoins"><a href="javascript:;">Contests</a></li>
+	  <li title="Who has the most coins?"><a id="coin_leaderboard" href="javascript:;">Leaderboards</a></li>
 	  <li></li>
 	  <li></li>
 	  
@@ -138,7 +139,7 @@
 		</div>
 		<!--<div><img src="http://farts.typepad.com/photos/uncategorized/cat_fart.jpg" /></div>-->
 	</div>
-
+	<div id="port"><?=$_GET['port']?></div>
 	<div id="chatUI">
 		<div class="row">
 		<div class="col-lg-4">
@@ -524,5 +525,23 @@ function both(){
 }
 
 </script>
+  <!-- Modal -->
+  <div class="modal" id="mainModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn">Close</a>
+         <!--  <a href="#" class="btn btn-primary">Save changes</a> -->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 </body>
 </html>

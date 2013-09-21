@@ -485,6 +485,38 @@ nav {
 	display: none;
 }
 
+
+#leaderboard-table {
+
+	border: 5px solid grey;
+	padding: 10px 0px 15px 1px;
+    border-radius:35px;
+    /*box-shadow:14px 14px 2px #888888;
+    
+    text-shadow:1px 1px 1px #888888;
+    */
+	background:black;
+	color:grey;
+	text-align:center;
+	font-size:20px;
+}
+  
+.leaderboard-table-row {
+    padding-left:6px;
+    border-bottom:5px solid grey;
+    color:white!important;
+    text-align:left;
+    width:auto;
+    margin-left:-1px;
+    margin-right:0px;
+  }
+  
+.leaderboard-codecoins {
+  float:right;
+  color:red!important;
+  margin-right:35px;
+  }  
+  
 @media (min-width: 768px) {
 	.row {
 		width: 99%;
@@ -514,6 +546,6 @@ nav {
 		color: orange;
 	}
 	.currency-symbol {
-		color: cyan;
+		color: cyan!important;
 	}
 }

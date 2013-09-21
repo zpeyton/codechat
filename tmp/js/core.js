@@ -137,7 +137,7 @@ function enableCodeMirrorOnTextArea (el_id,readOnly){
 function replaceEmoticons(text){
 
 	for(var i in smileys){
-		var img = '<img src="http://png-2.findicons.com/files/icons/963/very_emotional_emoticons/32/32_'+smileys[i]+'.png" />';
+		var img = '<img src="http://png-2.findicons.com/files/icons/963/very_emotional_emoticons/32/32_'+smileys[i]+'.png" width="16px" height="16px" />';
 		text = text.replace(i,img);
 	}
 	
@@ -270,7 +270,22 @@ function logout(){
 $(document).ready(function() {
 	
 	//status('Connecting...');
-	Server = new FancyWebSocket('ws://codechat.lytsp33d.com:8080');
+	port = $('#port').html()
+
+	if(!port.length) {
+		port = '8080'	
+	}
+	
+	Server = new FancyWebSocket('ws://codechat.lytsp33d.com:'+port);
+
+	$(document).keydown(function(e) { 
+    	
+    	if (e.keyCode == 27) {
+        //	alert('esc');
+
+        	$(".modal .close").click();
+	    }
+	});
 
 	$('#login_form').submit(function(e) {
 				
@@ -813,6 +828,15 @@ function showLoggedinUI(res) {
 	$('#logout').click(function (){
 		logout();	
 	});
+
+	
+	
+	$('#coin_leaderboard').click(function (){
+		send(JSON.stringify({
+  		  '_m':'coin_leaderboard' 
+  		}));	
+	});
+
 	var smileys_list = buildEmoticonList();
 
 	$('#msgWrap').append(smileys_list);
@@ -968,8 +992,43 @@ function displayErrors(errors,altel){
 		catch (e){
 			debug('malformed data');
 		}
+
+		if(res._m != 'mouse' && res._m != 'script'){
+			window.lastResponse = res;
+		}
 		
 		switch (res._m) {
+		
+		case 'coin_leaderboard':
+
+		rows = res._d.rows;
+    
+	    // loop over each row
+	    var x = 1;
+	    var code = '<div id="leaderboard-table">';
+	    for(var i in rows){
+	      
+	      // display each row
+	      
+	      // each row is an array element in the rows array 
+	      row = rows[i];
+	      username = row.username;
+	      coin = row.coin;
+	      
+	      // :)
+	      // append each row to the table div
+	      
+	      code += '<div class="leaderboard-table-row">'+x+'. '+username+ '<div class="leaderboard-codecoins"><span class="currency-symbol">₡</span>' + coin + '</div></div>';
+	      x++;
+	    }
+	    code+='</div>';
+
+	    //populate modal and show it
+	    $('#mainModal .modal-title').html('CodeCoin Leaders');
+	    $('#mainModal .modal-body').html(code);
+	    $('#mainModal').modal('show');
+
+		break;
 		
 		case 'tag_start':
 			$('.mouse').css('z-index','150');
@@ -1408,6 +1467,12 @@ function displayErrors(errors,altel){
 	window.codeEditors = {}
 	window.tag_occurred = null;
 	window.tag_starter = null;
+	setInterval(function (){
+		send(JSON.stringify({
+			'_m':'ping'
+		}));
+	},300000);
+
 	window.onfocus = function() {
 
 		window.isActive = true;
