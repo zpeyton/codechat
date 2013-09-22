@@ -152,7 +152,7 @@
 		</div>
 			<div id="settings">
 				<!-- <button id="update_avatar" class="btn btn-primary">Update avatar</button><br> -->
-				<span class="readable">Chat comms:</span>
+				<span class="readable">Chat commands:</span>
 				<code>/brb</code> <code>/back</code><br>
 				<!-- <span class="readable">Bkgr color:</span>
 				<input id="inbgcolor" class="color" placeholder="Enter a background color..." value="url(/lightspeed.png)" />
@@ -170,9 +170,8 @@
 		<div id="userWhiteboards">
 			<div id="newsoftheday" style="display:none"><b>Important news of the day:</b>
 				<ul>
-				<li>Everyone has to register again. Sorry for the inconvenience.. (everyone who has already registered again please disregard this message.</li>
-				<li>And one more thing...</li>
-			</ul>
+				<li>New leaderboard system is now implemented thanks to Zach and Kyle</li>
+				</ul>
 			<img src="http://0-media-collegehumor.cvcdn.com/54/67/ff0db022409cca599cb3f9ab028fb3ab.jpg" />
 			<!--<img src="http://laughingsquid.com/wp-content/uploads/tumblr_lugsodPWWM1qd6s2yo1_500.gif"/>-->
 			<!--<img src="http://www.myfacewhen.net/uploads/3168-shut-up-and-take-my-money.jpg" />-->
