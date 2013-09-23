@@ -516,7 +516,24 @@ nav {
   color:red!important;
   margin-right:35px;
   }  
+
+  .rock {
+    position:absolute;
+    z-index:1;
+  }
+  #rock1 {
+    
+    left:100px;
+    top:100px;
+  }
+
   
+  #rock2 {
+    
+    left:200px;
+    top:200px;
+  }
+
 @media (min-width: 768px) {
 	.row {
 		width: 99%;

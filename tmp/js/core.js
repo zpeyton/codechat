@@ -279,12 +279,12 @@ $(document).ready(function() {
 	Server = new FancyWebSocket('ws://codechat.lytsp33d.com:'+port);
 
 	$(document).keydown(function(e) { 
-    	
-    	if (e.keyCode == 27) {
-        //	alert('esc');
+		
+		if (e.keyCode == 27) {
+		//	alert('esc');
 
-        	$(".modal .close").click();
-	    }
+			$(".modal .close").click();
+		}
 	});
 
 	$('#login_form').submit(function(e) {
@@ -833,8 +833,8 @@ function showLoggedinUI(res) {
 	
 	$('#coin_leaderboard').click(function (){
 		send(JSON.stringify({
-  		  '_m':'coin_leaderboard' 
-  		}));	
+		  '_m':'coin_leaderboard' 
+		}));	
 	});
 
 	var smileys_list = buildEmoticonList();
@@ -1002,40 +1002,45 @@ function displayErrors(errors,altel){
 		case 'coin_leaderboard':
 
 		rows = res._d.rows;
-    
-	    // loop over each row
-	    var x = 1;
-	    var code = '<div id="leaderboard-table">';
-	    for(var i in rows){
-	      
-	      // display each row
-	      
-	      // each row is an array element in the rows array 
-	      row = rows[i];
-	      username = row.username;
-	      coin = row.coin;
-	      
-	      // :)
-	      // append each row to the table div
-	      
-	      code += '<div class="leaderboard-table-row">'+x+'. '+username+ '<div class="leaderboard-codecoins"><span class="currency-symbol">₡</span>' + coin + '</div></div>';
-	      x++;
-	    }
-	    code+='</div>';
+	
+		// loop over each row
+		var x = 1;
+		var code = '<div id="leaderboard-table">';
+		for(var i in rows){
+		  
+		  // display each row
+		  
+		  // each row is an array element in the rows array 
+		  row = rows[i];
+		  username = row.username;
+		  coin = row.coin;
+		  
+		  // :)
+		  // append each row to the table div
+		  
+		  code += '<div class="leaderboard-table-row">'+x+'. '+username+ '<div class="leaderboard-codecoins"><span class="currency-symbol">₡</span>' + coin + '</div></div>';
+		  x++;
+		}
+		code+='</div>';
 
-	    //populate modal and show it
-	    $('#mainModal .modal-title').html('CodeCoin Leaders');
-	    $('#mainModal .modal-body').html(code);
-	    $('#mainModal').modal('show');
+		//populate modal and show it
+		$('#mainModal .modal-title').html('CodeCoin Leaders');
+		$('#mainModal .modal-body').html(code);
+		$('#mainModal').modal('show');
 
 		break;
-		
+
 		case 'tag_start':
 			$('.mouse').css('z-index','150');
 			var name = $('#user_'+res.it+' .usrName').html();
 			alert('TAG STARTED! '+name+ ' is it!!!');
 			log('<div class="system message">TAG STARTED! '+name+' is it!!!</div>');
 			$('#mouse'+res.it+ '').css('border','5px solid cyan');
+			$('.rock').remove();
+			$('body').append(''
+				+'<div id="rock1" class="rock"><img src="/rock.png" /></div>'
+				+'<div id="rock2" class="rock"><img src="/rock.png" /></div>'
+				+'');
 			if(!window.tag_starter){
 				if(res.duration != '0'){
 					doTimer(res.duration);
@@ -1287,10 +1292,20 @@ function displayErrors(errors,altel){
 		break;
 		case 'tagged':
 			if(res.status == 'true'){
-				var name = $('#user_'+res.tagged+ ' .usrName').html();
+				var tagged_coin = +$('#user_'+res.tagged).attr('coin');
+				tagged_coin--;
+				
+				var tagger_coin = +$('#user_'+res.tagger).attr('coin');
+				tagger_coin++;
+				
+				$('#user_'+res.tagged).attr('coin',tagged_coin);
+				$('#user_'+res.tagger).attr('coin',tagger_coin);
+				
+				var tagged_name = $('#user_'+res.tagged+ ' .usrName').html();
+				var tagger_name = $('#user_'+res.tagger+ ' .usrName').html();
 				$('.mouse').css('border','none');
 				$('#mouse'+res.tagged+ '').css('border','5px solid cyan');
-				log('<div class="system message">'+name+' is it!!!</div>');
+				log('<div class="system message">'+tagged_name+' is it!!!</div>');
 			}
 
 		break;
