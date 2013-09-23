@@ -522,7 +522,7 @@ function both(){
 	doTimer();
 	stopCount();
 }
-
+//pushattempt
 </script>
   <!-- Modal -->
   <div class="modal" id="mainModal">
