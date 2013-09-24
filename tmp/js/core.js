@@ -1124,11 +1124,12 @@ function displayErrors(errors,altel){
 						}
 					}, 2000);
 				}
-				document.getElementById('msgsound').play();
+				
 				if(!window['alerted'] && !window['noalert']){
 					//alert('New Message...');
 					window.alerted = 1;
 				}
+				document.getElementById('msgsound').play();
 			}
 		 
 			break;
@@ -1158,8 +1159,7 @@ function displayErrors(errors,altel){
 
 		case 'user':
 
-			document.getElementById('joinsound').play();
-			
+						
 			var name = res._d.user.name;
 			var id = res._d.user.id;
 			var coin = res._d.user.coin;
@@ -1190,6 +1190,10 @@ function displayErrors(errors,altel){
 				$('.watcher[rel="user_'+id+'"]').remove();
 				$('#mouse'+id).remove();
 			}
+			if(document.getElementById('joinsound')){
+				document.getElementById('joinsound').play();
+			}
+
 			break;
 
 		case 'typing':
