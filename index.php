@@ -522,7 +522,7 @@ function both(){
 	doTimer();
 	stopCount();
 }
-//pushattempt
+///// adding a larger comment for test
 </script>
   <!-- Modal -->
   <div class="modal" id="mainModal">
