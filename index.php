@@ -124,21 +124,30 @@
 		<p id="users_online" class="readable"></p>
 		<a id="requestpassresetBtn" class="readable">Forgot password?</a>
 		</div>
-
+<br />
+		
 		<div class="col-lg-6">
-		<h3>Signup</h3>
-		<div id="reg_status"></div>
-		<form id="reg_form">
-			<input id="reg_username" placeholder="Username" value="">
-			<input id="reg_email" placeholder="Email" value="">
-			<input id="reg_password" placeholder="Password" type="password" value="">
-			<input id="reg_passwordconfirm" placeholder="Password Again" type="password" value="">
-			<input id="reg_submit" type="submit" value="Go"> <span id="logging_in"></span>
+			<div id="register"><input type="submit" value="Register" /></div>
+
+			<div id="popupContact">
+				<a id="popupContactClose">x</a>
+				<h3>Signup</h3>
+				<div id="reg_status"></div>
+				<form id="reg_form">
+				      <input id="reg_username" placeholder="Username" value=""><br />
+				      <input id="reg_email" placeholder="Email" type="email" value=""><br />
+				      <input id="reg_emailconfirm" placeholder="Email Again" type="email" value=""> <br />
+				      <input id="reg_password" placeholder="Password" type="password" value=""><br />
+				      <input id="reg_passwordconfirm" placeholder="Password Again" type="password" value=""><br />
+
+			<input id="reg_submit" type="submit" value="Go" onclick="checkEmailAddress($('#reg_email').val"> <span id="logging_in"></span>
 		</form>
-		<p id="users_total" class="readable"></p>
-		</div>
-		<!--<div><img src="http://farts.typepad.com/photos/uncategorized/cat_fart.jpg" /></div>-->
 	</div>
+	<div id="backgroundPopup"></div>
+		<p id="users_total" class="readable"></p>
+		
+		<!--<div><img src="http://farts.typepad.com/photos/uncategorized/cat_fart.jpg" /></div>-->
+
 	<div id="port"><?=$_GET['port']?></div>
 	<div id="chatUI">
 		<div class="row">

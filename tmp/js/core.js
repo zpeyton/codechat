@@ -1513,3 +1513,165 @@ function displayErrors(errors,altel){
 	}
 
 });
+//SETTING UP OUR POPUP
+//0 means disabled; 1 means enabled;
+ function pass(){
+		
+		setTimeout(function (){
+			
+			var first = $('#reg_password').val();
+			var second = $('#reg_passwordconfirm').val();
+
+			if(first == second){
+				$('#reg_passwordconfirm').css('background-color','green');
+				debug('matches');
+
+			} else {
+				
+				//$('#matchpword').html("<span style='color:red'>Your passwords dont match</span>");
+				$('#reg_passwordconfirm').css('background-color','red');
+				debug('does not match');
+			}
+
+		},100);
+		
+	}
+
+  function correct_email(){
+    setTimeout(function(){
+     	var email = $('#reg_email').val();
+                    if (checkEmailAddress(email)){
+        $('#reg_email').css('background-color','green');
+      }else {
+        $('#reg_email').css('background-color','red');
+      }
+    },100);
+    
+  }
+
+  function pass_email(){
+		
+		setTimeout(function (){
+			
+			var first = $('#reg_email').val();
+			var second = $('#reg_emailconfirm').val();
+
+			if(first == second){
+				$('#reg_emailconfirm').css('background-color','green');
+				debug('matches');
+
+			} else {
+				
+				//$('#matchpword').html("<span style='color:red'>Your emails dont match</span>");
+				$('#reg_emailconfirm').css('background-color','red');
+				debug('does not match');
+			}
+
+		},100);
+		
+	}
+$('#reg_passwordconfirm').keyup(function(e) {
+		pass();
+	});
+
+
+	$('#reg_emailconfirm').keyup(function(e) {
+			pass_email();
+		});
+
+
+
+var popupStatus = 0;
+
+//loading popup with jQuery magic!
+function loadPopup(){
+	//loads popup only if it is disabled
+	if(popupStatus==0){
+		$("#backgroundPopup").css({
+			"opacity": "0.7"
+		});
+		$("#backgroundPopup").fadeIn("slow");
+		$("#popupContact").fadeIn("slow");
+		popupStatus = 1;
+	}
+}
+
+//disabling popup with jQuery magic!
+function disablePopup(){
+	//disables popup only if it is enabled
+	if(popupStatus==1){
+		$("#backgroundPopup").fadeOut("slow");
+		$("#popupContact").fadeOut("slow");
+		popupStatus = 0;
+	}
+}
+
+//centering popup
+function centerPopup(){
+	//request data for centering
+	var windowWidth = document.documentElement.clientWidth;
+	var windowHeight = document.documentElement.clientHeight;
+	var popupHeight = $("#popupContact").height();
+	var popupWidth = $("#popupContact").width();
+	//centering
+	$("#popupContact").css({
+		"position": "absolute",
+		"top": windowHeight/2-popupHeight/2,
+		"left": windowWidth/2-popupWidth/2
+	});
+	//only need force for IE6
+	
+	$("#backgroundPopup").css({
+		"height": windowHeight
+	});
+	
+}
+
+
+//CONTROLLING EVENTS IN jQuery
+$(document).ready(function(){
+	
+	//LOADING POPUP
+	//Click the button event!
+	$("#register").click(function(){
+		//centering with css
+		centerPopup();
+		//load popup
+		loadPopup();
+	});
+				
+	//CLOSING POPUP
+	//Click the x event!
+	$("#popupContactClose").click(function(){
+		disablePopup();
+	});
+	//Click out event!
+	$("#backgroundPopup").click(function(){
+		disablePopup();
+	});
+	//Press Escape event!
+	$(document).keypress(function(e){
+		if(e.keyCode==27 && popupStatus==1){
+			disablePopup();
+		}
+	});
+
+});
+
+// (C) 2000 www.CodeLifter.com
+// http://www.codelifter.com
+// Free for all users, but leave in this header
+
+var good;
+function checkEmailAddress(field) {
+// the following expression must be all on one line...
+var goodEmail = field.value.match(/\b(^(\S+@).+((\.com)|(\.net)|(\.edu)|(\.mil)|(\.gov)|(\.org)|(\..{2,2}))$)\b/gi);
+if (goodEmail){
+   good = true
+} else {
+   alert('Please enter a valid e-mail address.')
+   field.focus()
+   field.select()
+   good = false 
+   }
+}
